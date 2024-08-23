@@ -55,7 +55,7 @@ public class Validator {
                         errors.add("can not be null");
                     }
                     if (!checkLength(field, address)) {
-                        errors.add("length less than 4");
+                        errors.add("length less than " + field.getAnnotation(MinLength.class).minLength());
                     }
                     return Map.entry(field.getName(), errors);
                 })

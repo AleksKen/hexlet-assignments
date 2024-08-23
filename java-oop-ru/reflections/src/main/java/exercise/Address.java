@@ -3,7 +3,7 @@ package exercise;
 class Address {
     // BEGIN
     @NotNull
-    @MinLength
+    @MinLength(minLength = 4)
     // END
     private String country;
 

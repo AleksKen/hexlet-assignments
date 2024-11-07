@@ -10,7 +10,10 @@ public final class App {
     public static Javalin getApp() {
 
         // BEGIN
-        return  Javalin.create(/*config*/)
+        return  Javalin.create(config -> {
+                    // Включаем логгирование при разработке
+                    config.bundledPlugins.enableDevLogging();
+                })
                 .get("/", context -> context.result("Welcome to Hexlet!"));
         // END
     }

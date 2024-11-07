@@ -9,13 +9,12 @@ import io.javalin.Javalin;
 public final class App {
 
     public static Javalin getApp() {
-
         // BEGIN
         return Javalin.create(config -> {
-                    // Включаем логгирование при разработке
-                    config.bundledPlugins.enableDevLogging();
-                })
-                .get("/welcome", context -> context.result("Welcome to Hexlet!"));
+            // Включаем логгирование при разработке
+            config.bundledPlugins.enableDevLogging();
+        })
+        .get("/welcome", context -> context.result("Welcome to Hexlet!"));
         // END
     }
 

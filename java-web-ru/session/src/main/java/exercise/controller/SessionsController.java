@@ -1,9 +1,11 @@
 package exercise.controller;
 
 import static io.javalin.rendering.template.TemplateUtil.model;
+
 import exercise.dto.MainPage;
 import exercise.dto.LoginPage;
 import exercise.repository.UsersRepository;
+
 import static exercise.util.Security.encrypt;
 
 import exercise.util.NamedRoutes;
@@ -17,6 +19,7 @@ public class SessionsController {
         var page = new LoginPage(null, null);
         ctx.render("build.jte", model("page", page));
     }
+
     public static void create(Context ctx) {
         var name = ctx.formParam("name");
         System.out.println(name);
@@ -31,12 +34,12 @@ public class SessionsController {
             }
             ctx.sessionAttribute("name", name);
             ctx.redirect(NamedRoutes.rootPath());
-        }
-        catch (NotFoundResponse e) {
+        } catch (NotFoundResponse e) {
             var page = new LoginPage(name, e.getMessage());
             ctx.render("build.jte", model("page", page));
         }
     }
+
     public static void destroy(Context ctx) {
         ctx.sessionAttribute("name", null);
         ctx.redirect(NamedRoutes.rootPath());

@@ -2,12 +2,15 @@ package exercise;
 
 import io.javalin.Javalin;
 import io.javalin.validation.ValidationException;
+
 import java.util.List;
 
 import exercise.model.Article;
 import exercise.dto.articles.ArticlesPage;
 import exercise.dto.articles.BuildArticlePage;
+
 import static io.javalin.rendering.template.TemplateUtil.model;
+
 import io.javalin.rendering.template.JavalinJte;
 
 import exercise.repository.ArticleRepository;
@@ -53,8 +56,7 @@ public final class App {
                 var article = new Article(title, content);
                 ArticleRepository.save(article);
                 context.redirect("/articles");
-            }
-            catch (ValidationException e) {
+            } catch (ValidationException e) {
                 context.status(422);
                 var page = new BuildArticlePage(title, content, e.getErrors());
                 context.render("articles/build.jte", model("page", page));
@@ -68,7 +70,7 @@ public final class App {
     private static Boolean checkTitle(String title, List<Article> allArticles) {
         for (var article : allArticles) {
             if (title.equals(article.getTitle())) {
-                 return false;
+                return false;
             }
         }
         return true;

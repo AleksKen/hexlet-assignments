@@ -35,6 +35,7 @@ public class Application {
                     .findFirst();
             name.ifPresent(res::add);
         }
+        res.stream().sorted();
         return res;
     }
     // END

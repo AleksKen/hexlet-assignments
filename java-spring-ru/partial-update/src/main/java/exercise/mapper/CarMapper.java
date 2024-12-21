@@ -11,8 +11,6 @@ import exercise.dto.CarUpdateDTO;
 import exercise.dto.CarDTO;
 import exercise.model.Car;
 
-import java.lang.annotation.Target;
-
 // BEGIN
 @Mapper(
         uses = { JsonNullableMapper.class },

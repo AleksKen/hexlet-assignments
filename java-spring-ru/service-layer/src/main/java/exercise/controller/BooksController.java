@@ -26,6 +26,7 @@ public class BooksController {
     private BookService bookService;
 
     // BEGIN
+
     @GetMapping
     List<BookDTO> index() {
         return bookService.getAll();

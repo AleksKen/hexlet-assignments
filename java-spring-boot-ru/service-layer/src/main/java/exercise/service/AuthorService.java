@@ -14,6 +14,38 @@ import java.util.List;
 @Service
 public class AuthorService {
     // BEGIN
-    
+    @Autowired
+    private AuthorRepository  authorRepository;
+
+    @Autowired
+    private AuthorMapper authorMapper;
+
+    public List<AuthorDTO> findAll() {
+        return authorRepository.findAll().stream().map(authorMapper::map).toList();
+    }
+
+    public AuthorDTO findById(Long id) {
+        var res = authorRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Author with id " + id + " not found!"));
+        return authorMapper.map(res);
+    }
+
+    public AuthorDTO create(AuthorCreateDTO dto) {
+        var author = authorMapper.map(dto);
+        authorRepository.save(author);
+        return authorMapper.map(author);
+    }
+
+    public AuthorDTO update(AuthorUpdateDTO dto, Long id) {
+        var author = authorRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Author with id " + id + " not found!"));
+        authorMapper.update(dto, author);
+        authorRepository.save(author);
+        return authorMapper.map(author);
+    }
+
+    public void destroy(Long id) {
+        authorRepository.deleteById(id);
+    }
     // END
 }

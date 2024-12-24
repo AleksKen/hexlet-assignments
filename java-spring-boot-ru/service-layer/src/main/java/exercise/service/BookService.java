@@ -49,7 +49,7 @@ public class BookService {
                 .orElseThrow(() -> new ResourceNotFoundException("Book with id " + id + " not found!"));
 
         if (!authorRepository.existsById(dto.getAuthorId().get())) {
-            throw new ConstraintViolationException("Author with id " + dto.getAuthorId() + " not found!", null);
+            throw new ConstraintViolationException("Author with id " + dto.getAuthorId().get() + " not found!", null);
         }
 
         bookMapper.update(dto, book);

@@ -20,6 +20,7 @@ public class AuthorService {
     @Autowired
     private AuthorMapper authorMapper;
 
+
     public List<AuthorDTO> findAll() {
         return authorRepository.findAll().stream().map(authorMapper::map).toList();
     }
